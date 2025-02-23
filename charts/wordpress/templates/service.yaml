@@ -8,9 +8,8 @@ metadata:
 spec:
   ports:
   - port: 80
-    targetPort: http
-    protocol: TCP
-    name: http
+    targetPort: http-port
+    name: http-sv-port
   selector:
     app: wordpress
     release: {{ .Release.Name }}

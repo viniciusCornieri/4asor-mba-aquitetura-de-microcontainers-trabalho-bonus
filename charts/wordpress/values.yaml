@@ -9,8 +9,6 @@ storage:
 
 ingress:
   enabled: true
-  className: nginx
-  host: wordpress.local
 
 resources:
   requests:
