@@ -133,3 +133,13 @@ helm install wordpress 4asor/wordpress \
   --set mysql.mysql.database=wordpress
 
 ```
+
+Visualizar se os pods estão de pé:
+
+```shell
+kubectl get pods -n wordpress -w
+```
+
+Aguardar até que ambos os pods estejam `READY 1/1`. Apertar `Ctrl+C` para sair do modo watch.
+Exemplo de saida:
+![pods em pé](docs/pods-up.png)
