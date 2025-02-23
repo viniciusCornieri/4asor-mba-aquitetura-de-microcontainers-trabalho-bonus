@@ -61,7 +61,7 @@ Abaixo contém os arquivos de charts e utilizados pelo github workflows, vale re
 no chart do mysql foi criado um secret para  as senhas, o usuário da aplicação e o database da aplicação, que podem ser customizados passando um arquivo values.yaml. É utilizado um volume persistente no proprio host para ambos mysql e wordpress.
 
 
-wordpress-helm/
+4asor-mba-aquitetura-de-microcontainers-trabalho-bonus/
 ├── .github/
 │   └── workflows/
 │       └── [release.yaml](.github/workflows/release.yaml)
