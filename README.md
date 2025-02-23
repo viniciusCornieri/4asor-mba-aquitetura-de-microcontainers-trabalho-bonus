@@ -3,6 +3,18 @@
 Esta página tem como objetivo fornecer os arquivos no formato de [helm-chart](https://helm.sh/) para a infraestrutura de wordpress com banco de dados mysql gerenciado em Kubernetes, é referente a um trabalho bônus do MBA de Arquitetura de Soluções da FIAP da disciplina de Arquitetura de Microcontainers. Esta página e fornecimento do helm-chart pelo github pages foi feito utilizando como base o projeto especificado em [Provision a free personal Helm chart repo using GitHub](https://medium.com/@gerkElznik/provision-a-free-personal-helm-chart-repo-using-github-583b668d9ba4). Os charts e a referência para sua criação estão na branch `gh-pages`, que está referenciada na página [do github pages](https://viniciuscornieri.github.io/4asor-mba-aquitetura-de-microcontainers-trabalho-bonus/)
 . nesta branch padrão assume que irá utilizar os charts já criados e publicados por este github.
 
+## Alunos
+
+Gustavo Zicatti Raimundo – RM353770 
+
+Marcelo Percebao – RM353687 
+
+Romulo Lunardi de Miranda Jordão – RM353783 
+
+Thiago Guimarães Lemos – RM353707 
+
+Vinicius Martins Cornieri – RM353319 
+
 ## Pré-requisitos
 
 * Iremos utilizar a [plataforma Killercoda](https://killercoda.com/) para fazer esse laboratório, então é necessário que já tenha criado uma conta na plataforma. 
