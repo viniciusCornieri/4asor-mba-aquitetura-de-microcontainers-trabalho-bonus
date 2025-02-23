@@ -57,20 +57,20 @@ rm -rf charts/wordpress/templates/*
 
 ### 2. Estrutura desse projeto
 
-Abaixo contém os arquivos de charts e utilizados pelo github workflows 
+Abaixo contém os arquivos de charts e utilizados pelo github workflows, vale ressaltar alguns pontos importantes como
+no chart do mysql foi criado um secret para  as senhas, o usuário da aplicação e o database da aplicação, que podem ser customizados passando um arquivo values.yaml. É utilizado um volume persistente no proprio host para ambos mysql e wordpress.
 
 ```
 wordpress-helm/
 ├── .github/
 │   └── workflows/
-│       ├── [release.yaml](.github/workflows/release.yaml)
-│       └── [test.yaml](.github/workflows/test.yaml)
+│       └── [release.yaml](.github/workflows/release.yaml)
 ├── charts/
 │   ├── mysql/
-│   │   ├── [Chart.yaml](charts/mysql/Chart.yaml)
-│   │   ├── [values.yaml](charts/mysql/values.yaml)
+│   │   ├── [Chart.yaml](charts/mysql/Chart.yaml) # Definição do chart helm
+│   │   ├── [values.yaml](charts/mysql/values.yaml) # Definição do values padrão do mysql
 │   │   ├── templates/
-│   │   │   ├── [NOTES.txt](charts/mysql/templates/NOTES.txt)
+│   │   │   ├── [NOTES.txt](charts/mysql/templates/NOTES.txt) 
 │   │   │   ├── [deployment.yaml](charts/mysql/templates/deployment.yaml)
 │   │   │   ├── [pvc.yaml](charts/mysql/templates/pvc.yaml)
 │   │   │   ├── [secret.yaml](charts/mysql/templates/secret.yaml)
