@@ -60,7 +60,7 @@ rm -rf charts/wordpress/templates/*
 Abaixo contém os arquivos de charts e utilizados pelo github workflows, vale ressaltar alguns pontos importantes como
 no chart do mysql foi criado um secret para  as senhas, o usuário da aplicação e o database da aplicação, que podem ser customizados passando um arquivo values.yaml. É utilizado um volume persistente no proprio host para ambos mysql e wordpress.
 
-```
+
 wordpress-helm/
 ├── .github/
 │   └── workflows/
@@ -90,4 +90,3 @@ wordpress-helm/
 │       └── tests/
 │           └── [test-connection.yaml](charts/wordpress/templates/tests/test-connection.yaml)
 └── [README.md](README.md)
-```
