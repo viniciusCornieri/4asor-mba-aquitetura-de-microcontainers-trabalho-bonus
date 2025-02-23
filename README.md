@@ -55,150 +55,39 @@ rm -rf charts/mysql/templates/*
 rm -rf charts/wordpress/templates/*
 ```
 
-### 2. Criação do template para o Mysql
+### 2. Estrutura desse projeto
 
-O chart do mysql foi criado utilizando os seguintes arquivos:
-
-#### 2.1 charts/mysql/templates/deployment.yaml
-
-Aquivo que irá configurar o deployment do mysql no kubernetes, ele configura a imagem o password root e de usuário, e também o volume persistente para os pods do mysql.
-
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: {{ .Release.Name }}-mysql
-  labels:
-    app: mysql
-    release: {{ .Release.Name }}
-spec:
-  selector:
-    matchLabels:
-      app: mysql
-      release: {{ .Release.Name }}
-  strategy:
-    type: Recreate
-  template:
-    metadata:
-      labels:
-        app: mysql
-        release: {{ .Release.Name }}
-    spec:
-      containers:
-      - name: mysql
-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-        imagePullPolicy: {{ .Values.image.pullPolicy }}
-        env:
-        - name: MYSQL_ROOT_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: {{ .Release.Name }}-mysql-secret
-              key: mysql-root-password
-        - name: MYSQL_DATABASE
-          value: {{ .Values.mysql.database }}
-        - name: MYSQL_USER
-          value: {{ .Values.mysql.user }}
-        - name: MYSQL_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: {{ .Release.Name }}-mysql-secret
-              key: mysql-password
-        ports:
-        - name: mysql
-          containerPort: 3306
-        volumeMounts:
-        - name: mysql-persistent-storage
-          mountPath: /var/lib/mysql
-        resources:
-          {{- toYaml .Values.resources | nindent 12 }}
-      volumes:
-      - name: mysql-persistent-storage
-        persistentVolumeClaim:
-          claimName: {{ .Release.Name }}-mysql-pvc
-```
-
-#### 2.2 charts/mysql/templates/service.yaml
-
-Aquivo que irá configurar o service do mysql no kubernetes.
-
-```yaml
-apiVersion: v1
-kind: Service
-metadata:
-  name: {{ .Release.Name }}-mysql
-  labels:
-    app: mysql
-    release: {{ .Release.Name }}
-spec:
-  ports:
-  - port: 3306
-    targetPort: mysql
-    protocol: TCP
-    name: mysql
-  selector:
-    app: mysql
-    release: {{ .Release.Name }}
-  clusterIP: None
-```
-
-#### 2.3 charts/mysql/templates/secret.yaml
-
-Aquivo que irá configurar o secret do mysql no kubernetes, configurando as senhas do root do mysql e do usuario
-
-```yaml
-apiVersion: v1
-kind: Secret
-metadata:
-  name: {{ .Release.Name }}-mysql-secret
-  labels:
-    app: mysql
-    release: {{ .Release.Name }}
-type: Opaque
-data:
-  mysql-root-password: {{ .Values.mysql.rootPassword | b64enc }}
-  mysql-password: {{ .Values.mysql.password | b64enc }}
-```
-
-#### 2.4 charts/mysql/templates/pvc.yaml
-
-Aquivo que irá configurar o volume persistente do mysql no kubernetes.
-
-```yaml
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: {{ .Release.Name }}-mysql-pvc
-  labels:
-    app: mysql
-    release: {{ .Release.Name }}
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: {{ .Values.storage.size }}
-  storageClassName: {{ .Values.storage.storageClass }}
-```
-
-
-#### 2.5 charts/mysql/templates/NOTES.txt
-
-Aquivo que com a mensagem que irá aparecer ao instalar esse chart do mysql.
+Abaixo contém os arquivos de charts e utilizados pelo github workflows 
 
 ```
-MySQL has been deployed successfully!
-
-Connection details:
-  Host: {{ .Release.Name }}-mysql
-  Port: 3306
-  Database: {{ .Values.mysql.database }}
-  User: {{ .Values.mysql.user }}
-
-To connect to your database:
-  kubectl run -it --rm --image=mysql:8.0 --restart=Never mysql-client -- mysql -h {{ .Release.Name }}-mysql -u {{ .Values.mysql.user }} -p{{ .Values.mysql.password }}
+wordpress-helm/
+├── .github/
+│   └── workflows/
+│       ├── [release.yaml](.github/workflows/release.yaml)
+│       └── [test.yaml](.github/workflows/test.yaml)
+├── charts/
+│   ├── mysql/
+│   │   ├── [Chart.yaml](charts/mysql/Chart.yaml)
+│   │   ├── [values.yaml](charts/mysql/values.yaml)
+│   │   ├── templates/
+│   │   │   ├── [NOTES.txt](charts/mysql/templates/NOTES.txt)
+│   │   │   ├── [deployment.yaml](charts/mysql/templates/deployment.yaml)
+│   │   │   ├── [pvc.yaml](charts/mysql/templates/pvc.yaml)
+│   │   │   ├── [secret.yaml](charts/mysql/templates/secret.yaml)
+│   │   │   └── [service.yaml](charts/mysql/templates/service.yaml)
+│   │   ├── tests/
+│   │   │   └── [test-connection.yaml](charts/mysql/templates/tests/test-connection.yaml)
+│   └── wordpress/
+│       ├── [Chart.yaml](charts/wordpress/Chart.yaml)
+│       ├── [values.yaml](charts/wordpress/values.yaml)
+│       ├── templates/
+│       │   ├── [NOTES.txt](charts/wordpress/templates/NOTES.txt)
+│       │   ├── [_helpers.tpl](charts/wordpress/templates/_helpers.tpl)
+│       │   ├── [deployment.yaml](charts/wordpress/templates/deployment.yaml)
+│       │   ├── [ingress.yaml](charts/wordpress/templates/ingress.yaml)
+│       │   ├── [pvc.yaml](charts/wordpress/templates/pvc.yaml)
+│       │   └── [service.yaml](charts/wordpress/templates/service.yaml)
+│       └── tests/
+│           └── [test-connection.yaml](charts/wordpress/templates/tests/test-connection.yaml)
+└── [README.md](README.md)
 ```
-
-#### 2.6 charts/mysql/templates/tests/test-connection.yaml
-
-Aquivo que para o helm validar que o chart foi aplicado com sucesso.
-[tests/test-connection.yaml](charts/mysql/templates/tests/test-connection.yaml)

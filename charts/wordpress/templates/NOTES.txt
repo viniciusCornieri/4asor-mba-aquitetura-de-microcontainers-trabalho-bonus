@@ -1,0 +1,24 @@
+WordPress has been deployed successfully!
+
+{{- if .Values.ingress.enabled }}
+Your WordPress site is available at:
+  http://{{ .Values.ingress.host }}
+
+{{- else }}
+To access your WordPress site, run:
+  kubectl port-forward svc/{{ .Release.Name }}-wordpress 8080:80
+
+Then visit:
+  http://localhost:8080
+{{- end }}
+
+Initial credentials:
+  URL: {{ if .Values.ingress.enabled }}http://{{ .Values.ingress.host }}{{ else }}http://localhost:8080{{ end }}/wp-admin
+  Username: admin (after installation)
+  Password: Set during first access
+
+Notes:
+1. It may take a few minutes for WordPress to be ready
+2. Run 'kubectl get pods -l app=wordpress' to check the status
+3. For troubleshooting, check the logs:
+   kubectl logs -f deployment/{{ .Release.Name }}-wordpress
