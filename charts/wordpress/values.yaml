@@ -4,8 +4,8 @@ image:
   pullPolicy: IfNotPresent
 
 storage:
-  size: 10Gi
-  storageClass: microk8s-hostpath
+  size: 2Gi
+  storageClass: local-path
 
 ingress:
   enabled: true

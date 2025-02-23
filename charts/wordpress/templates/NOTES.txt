@@ -21,4 +21,4 @@ Notes:
 1. It may take a few minutes for WordPress to be ready
 2. Run 'kubectl get pods -l app=wordpress' to check the status
 3. For troubleshooting, check the logs:
-   kubectl logs -f deployment/{{ .Release.Name }}-wordpress
+   kubectl logs -f deployment/{{ .Release.Name }}-wordpress -n {{ .Release.namespace }}
