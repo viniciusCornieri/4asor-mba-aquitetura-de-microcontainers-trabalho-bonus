@@ -1,6 +1,6 @@
 image:
   repository: wordpress
-  tag: "php8.3-fpm-alpine"
+  tag: "6.7-alpine"
   pullPolicy: IfNotPresent
 
 storage:
@@ -15,7 +15,7 @@ replicas: 3
 resources:
   requests:
     memory: "256Mi"
-    cpu: "250m"
+    cpu: "150m"
   limits:
     memory: "512Mi"
-    cpu: "500m"
+    cpu: "250m"

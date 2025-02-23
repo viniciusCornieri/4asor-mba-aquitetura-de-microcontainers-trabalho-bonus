@@ -1,5 +1,5 @@
 apiVersion: v2
 name: mysql
 description: MySQL chart for WordPress installation
-version: 0.1.3
+version: 0.1.4
 type: application
