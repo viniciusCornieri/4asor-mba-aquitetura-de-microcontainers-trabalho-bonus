@@ -30,6 +30,19 @@ entries:
     version: 0.1.0
   wordpress:
   - apiVersion: v2
+    created: "2025-02-23T20:34:17.732453091Z"
+    dependencies:
+    - name: mysql
+      repository: file://../mysql
+      version: 0.1.2
+    description: WordPress chart for company website
+    digest: d28938da8b51b98cb2b606532c6ff6484b29d833f8cea50bfd932088b983a900
+    name: wordpress
+    type: application
+    urls:
+    - https://github.com/viniciusCornieri/4asor-mba-aquitetura-de-microcontainers-trabalho-bonus/releases/download/wordpress-0.1.5/wordpress-0.1.5.tgz
+    version: 0.1.5
+  - apiVersion: v2
     created: "2025-02-23T20:33:21.920451437Z"
     dependencies:
     - name: mysql
@@ -94,4 +107,4 @@ entries:
     urls:
     - https://github.com/viniciusCornieri/4asor-mba-aquitetura-de-microcontainers-trabalho-bonus/releases/download/wordpress-0.1.0/wordpress-0.1.0.tgz
     version: 0.1.0
-generated: "2025-02-23T20:33:21.920475892Z"
+generated: "2025-02-23T20:34:17.732485732Z"
