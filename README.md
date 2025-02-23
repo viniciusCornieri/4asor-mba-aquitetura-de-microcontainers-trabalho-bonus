@@ -1,6 +1,6 @@
 # Trabalho bônus Arquitetura de Microcontainers
 
-Esta página tem como objetivo fornecer os arquivos no formato de [helm-chart](https://helm.sh/) para a infraestrutura de wordpress com banco de dados mysql gerenciado em Kubernetes, é referente a um trabalho bônus do MBA de Arquitetura de Soluções da FIAP da disciplina de Arquitetura de Microcontainers. Esta página e fornecimento do helm-chart pelo github pages foi feito utilizando como base o projeto especificado em [Provision a free personal Helm chart repo using GitHub](https://medium.com/@gerkElznik/provision-a-free-personal-helm-chart-repo-using-github-583b668d9ba4)
+Esta página tem como objetivo fornecer os arquivos no formato de [helm-chart](https://helm.sh/) para a infraestrutura de wordpress com banco de dados mysql gerenciado em Kubernetes, é referente a um trabalho bônus do MBA de Arquitetura de Soluções da FIAP da disciplina de Arquitetura de Microcontainers. Esta página e fornecimento do helm-chart pelo github pages foi feito utilizando como base o projeto especificado em [Provision a free personal Helm chart repo using GitHub](https://medium.com/@gerkElznik/provision-a-free-personal-helm-chart-repo-using-github-583b668d9ba4).
 
 ## Pré-requisitos
 
@@ -92,4 +92,11 @@ no chart do mysql foi criado um secret para  as senhas, o usuário da aplicaçã
 └── [README.md](README.md)\
 
 
+
+### 3. Publicação dos charts
+
 Os charts serão publicados pelo plugin [chart releaser do github](https://github.com/helm/chart-releaser-action) configurado no arquivo, [.github/workflows/release.yaml](.github/workflows/release.yaml).
+
+Para isso foi necessário dar permissão de escrita no github para os workflows. No repositório `Settings > Actions > General`, na seção de `Workflow permissions` selecionar `Read and write permissions` e salvar.
+
+![github-workflow-permissions](docs/github-workflow-permissions.png)
