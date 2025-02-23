@@ -80,7 +80,7 @@ Com o Helm e o K3S instalados e configurados, o primeiro passo é adicionar o re
 
 ```shell
 # Adiciona o repositorio no helm
-helm repo add 4asor-vmc https://viniciuscornieri.github.io/4asor-mba-aquitetura-de-microcontainers-trabalho-bonus/
+helm repo add 4asor https://viniciuscornieri.github.io/4asor-mba-aquitetura-de-microcontainers-trabalho-bonus/
 
 ```
 
@@ -91,7 +91,7 @@ Executar um update para atualizar as referências locais, e um search para valid
 helm repo update
 
 # lista charts do repositória adicionado
-helm search repo 4asor-vmc
+helm search repo 4asor
 
 ```
 
@@ -114,7 +114,7 @@ Com o seguinte comando iremos instalar o chart do wordpress que tem como depend�
 
 ```shell
 # instala chart do wordpress no namespace wordpress
-helm install wordpress 4asor-vmc/wordpress \
+helm install wordpress 4asor/wordpress \
   --namespace wordpress \
   --set mysql.rootPassword=SuaSenhaSegura123! \
   --set mysql.password=SuaSenhaWordPress456! \
