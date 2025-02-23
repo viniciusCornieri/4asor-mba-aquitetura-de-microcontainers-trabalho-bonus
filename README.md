@@ -64,6 +64,7 @@ exemplo de saída:
 Para utilizar o helm com esse cluster é necessário configurar o arquivo `.kube/config`
 
 ```shell
+su ubuntu
 # cria diretorio .kube
 mkdir $HOME/.kube
 # copia arquivo de configuração
