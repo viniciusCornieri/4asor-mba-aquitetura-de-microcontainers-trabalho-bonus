@@ -90,3 +90,6 @@ no chart do mysql foi criado um secret para  as senhas, o usuário da aplicaçã
 │       └── tests/\
 │           └── [test-connection.yaml](charts/wordpress/templates/tests/test-connection.yaml)\
 └── [README.md](README.md)\
+
+
+Os charts serão publicados pelo plugin [chart releaser do github](https://github.com/helm/chart-releaser-action) configurado no arquivo, [.github/workflows/release.yaml](.github/workflows/release.yaml).
