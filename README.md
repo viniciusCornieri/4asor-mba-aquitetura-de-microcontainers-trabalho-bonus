@@ -61,32 +61,32 @@ Abaixo contém os arquivos de charts e utilizados pelo github workflows, vale re
 no chart do mysql foi criado um secret para  as senhas, o usuário da aplicação e o database da aplicação, que podem ser customizados passando um arquivo values.yaml. É utilizado um volume persistente no proprio host para ambos mysql e wordpress.
 
 
-4asor-mba-aquitetura-de-microcontainers-trabalho-bonus/
-├── .github/
-│   └── workflows/
-│       └── [release.yaml](.github/workflows/release.yaml)
-├── charts/
-│   ├── mysql/
-│   │   ├── [Chart.yaml](charts/mysql/Chart.yaml) # Definição do chart helm
-│   │   ├── [values.yaml](charts/mysql/values.yaml) # Definição do values padrão do mysql
-│   │   ├── templates/
-│   │   │   ├── [NOTES.txt](charts/mysql/templates/NOTES.txt) 
-│   │   │   ├── [deployment.yaml](charts/mysql/templates/deployment.yaml)
-│   │   │   ├── [pvc.yaml](charts/mysql/templates/pvc.yaml)
-│   │   │   ├── [secret.yaml](charts/mysql/templates/secret.yaml)
-│   │   │   └── [service.yaml](charts/mysql/templates/service.yaml)
-│   │   ├── tests/
-│   │   │   └── [test-connection.yaml](charts/mysql/templates/tests/test-connection.yaml)
-│   └── wordpress/
-│       ├── [Chart.yaml](charts/wordpress/Chart.yaml)
-│       ├── [values.yaml](charts/wordpress/values.yaml)
-│       ├── templates/
-│       │   ├── [NOTES.txt](charts/wordpress/templates/NOTES.txt)
-│       │   ├── [_helpers.tpl](charts/wordpress/templates/_helpers.tpl)
-│       │   ├── [deployment.yaml](charts/wordpress/templates/deployment.yaml)
-│       │   ├── [ingress.yaml](charts/wordpress/templates/ingress.yaml)
-│       │   ├── [pvc.yaml](charts/wordpress/templates/pvc.yaml)
-│       │   └── [service.yaml](charts/wordpress/templates/service.yaml)
-│       └── tests/
-│           └── [test-connection.yaml](charts/wordpress/templates/tests/test-connection.yaml)
-└── [README.md](README.md)
+4asor-mba-aquitetura-de-microcontainers-trabalho-bonus/\
+├── .github/\
+│   └── workflows/\
+│       └── [release.yaml](.github/workflows/release.yaml)\
+├── charts/\
+│   ├── mysql/\
+│   │   ├── [Chart.yaml](charts/mysql/Chart.yaml)\
+│   │   ├── [values.yaml](charts/mysql/values.yaml) \
+│   │   ├── templates/\
+│   │   │   ├── [NOTES.txt](charts/mysql/templates/NOTES.txt) \
+│   │   │   ├── [deployment.yaml](charts/mysql/templates/deployment.yaml)\
+│   │   │   ├── [pvc.yaml](charts/mysql/templates/pvc.yaml)\
+│   │   │   ├── [secret.yaml](charts/mysql/templates/secret.yaml)\
+│   │   │   └── [service.yaml](charts/mysql/templates/service.yaml)\
+│   │   ├── tests/\
+│   │   │   └── [test-connection.yaml](charts/mysql/templates/tests/test-connection.yaml)\
+│   └── wordpress/\
+│       ├── [Chart.yaml](charts/wordpress/Chart.yaml)\
+│       ├── [values.yaml](charts/wordpress/values.yaml)\
+│       ├── templates/\
+│       │   ├── [NOTES.txt](charts/wordpress/templates/NOTES.txt)\
+│       │   ├── [_helpers.tpl](charts/wordpress/templates/_helpers.tpl)\
+│       │   ├── [deployment.yaml](charts/wordpress/templates/deployment.yaml)\
+│       │   ├── [ingress.yaml](charts/wordpress/templates/ingress.yaml)\
+│       │   ├── [pvc.yaml](charts/wordpress/templates/pvc.yaml)\
+│       │   └── [service.yaml](charts/wordpress/templates/service.yaml)\
+│       └── tests/\
+│           └── [test-connection.yaml](charts/wordpress/templates/tests/test-connection.yaml)\
+└── [README.md](README.md)\
