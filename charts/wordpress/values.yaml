@@ -1,6 +1,6 @@
 image:
   repository: wordpress
-  tag: "6.7-alpine"
+  tag: "6.7-apache"
   pullPolicy: IfNotPresent
 
 storage:
