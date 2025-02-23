@@ -4,6 +4,6 @@ description: WordPress chart for company website
 version: 0.1.2
 type: application
 dependencies:
-  - name: db
+  - name: mysql
     version: 0.1.2
     repository: "file://../mysql"
