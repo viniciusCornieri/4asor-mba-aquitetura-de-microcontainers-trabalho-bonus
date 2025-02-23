@@ -1,6 +1,6 @@
 image:
   repository: wordpress
-  tag: "6.4-apache"
+  tag: "php8.3-fpm-alpine"
   pullPolicy: IfNotPresent
 
 storage:
@@ -9,6 +9,8 @@ storage:
 
 ingress:
   enabled: true
+
+replicas: 3
 
 resources:
   requests:
