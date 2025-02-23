@@ -72,6 +72,17 @@ sudo cp /etc/rancher/k3s/k3s.yaml $HOME/.kube/config
 sudo chmod 644 $HOME/.kube/config
 ```
 
+### 5. Instalar K9s
+
+Vamos instalar o k9s para facilitar inspeções no kubernetes caso seja necessário.
+
+```shell
+# ir para a home do usuário
+cd $HOME
+# copia arquivo de configuração
+wget https://github.com/derailed/k9s/releases/download/v0.32.7/k9s_linux_amd64.deb && sudo apt install ./k9s_linux_amd64.deb && rm k9s_linux_amd64.deb
+```
+
 ## Execução do laboratório
 
 ### Passo 01 - Adicionar repositório com os charts
@@ -110,15 +121,15 @@ kubectl create namespace wordpress
 
 ### Passo 03 - Instalar o chart do wordpress
 
-Com o seguinte comando iremos instalar o chart do wordpress que tem como dependência o chart do mysql referenciados [na página](https://viniciuscornieri.github.io/4asor-mba-aquitetura-de-microcontainers-trabalho-bonus/). Redifina as senhas para senhas seguras que serão guardadas como `secret` do kubernetes. 
+Com o seguinte comando iremos instalar o chart do wordpress que tem como dependência o chart do mysql referenciados [na página](https://viniciuscornieri.github.io/4asor-mba-aquitetura-de-microcontainers-trabalho-bonus/). Redifina as senhas para senhas seguras que serão guardadas como `secret` do kubernetes. Como o mysql é uma subdependencia do wordpress, para redefinir as configuração temos que referenciar o subchart chart `mysql` e as propriedades `mysql...`, como exemplo o definindo o rootPassword assim, `mysql.mysql.rootPassword=novaSenha`.
 
 ```shell
 # instala chart do wordpress no namespace wordpress
 helm install wordpress 4asor/wordpress \
   --namespace wordpress \
-  --set db.mysql.rootPassword=SuaSenhaSegura123! \
-  --set db.mysql.password=SuaSenhaPress456! \
-  --set db.mysql.user=wordpress \
-  --set db.mysql.database=wordpress
+  --set mysql.mysql.rootPassword=SuaSenhaSegura123! \
+  --set mysql.mysql.password=SuaSenhaPress456! \
+  --set mysql.mysql.user=wordpress \
+  --set mysql.mysql.database=wordpress
 
 ```
