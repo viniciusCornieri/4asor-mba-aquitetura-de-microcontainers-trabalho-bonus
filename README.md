@@ -64,7 +64,6 @@ exemplo de saída:
 Para utilizar o helm com esse cluster é necessário configurar o arquivo `.kube/config`
 
 ```shell
-su ubuntu
 # cria diretorio .kube
 mkdir $HOME/.kube
 # copia arquivo de configuração
@@ -73,7 +72,7 @@ sudo cp /etc/rancher/k3s/k3s.yaml $HOME/.kube/config
 sudo chmod 644 $HOME/.kube/config
 ```
 
-### 5. Instalar K9s
+### 5. Instalar K9s (Opcional)
 
 Vamos instalar o k9s para facilitar inspeções no kubernetes caso seja necessário.
 
@@ -136,7 +135,7 @@ helm install wordpress 4asor/wordpress \
 
 ```
 
-Visualizar se os pods estão de pé:
+Visualizar se os pods estão de pé, isso pode levar por volta de 30segundos ou um pouco mais:
 
 ```shell
 kubectl get pods -n wordpress -w
@@ -145,3 +144,38 @@ kubectl get pods -n wordpress -w
 Aguardar até que todos os pods estejam `READY 1/1`. Apertar `Ctrl+C` para sair do modo watch.
 Exemplo de saida:
 ![pods em pé](docs/pods-up.png)
+
+### Passo 04 - Forçar HTTPS no wordpress
+
+O killercoda quando acessamos por traffic ports irá vir por HTTPS, porém os assets do wordpress estarão em HTTP sendo assim bloqueados pelo navegador. Para contornar esse problema após os pods do wordpress estiverem no ar executar o seguinte comando:
+
+```shell
+kubectl exec -it $(kubectl get pods -n wordpress -l app=wordpress -o jsonpath="{.items[0].metadata.name}") -n wordpress -- sh -c "sed -i 's/if (isset/if (true || isset/g' /var/www/html/wp-config.php"
+
+
+```
+
+Esse comando faz com que o wordpress entenda que está com um proxy reverso e force o `https`.
+
+### Passo 05 - Acessar Traffic/Ports 80 do KillerCoda
+
+No menu no canto esquerdo do killercoda possui o item `Traffic/Ports`, na nova aba que irá abrir clicar para acessar a porta 80 para que assim tenha acesso ao portal admin do wordpress.
+![traffic ports menu](docs/traffic-ports-menu.png)
+![traffic ports page](docs/traffic-ports-page.png)
+
+Por fim chegamos na página de instalação e administração do wordpress.
+![install page wordpress](docs/install-page-wordpress.png)
+
+### Passo 06 - (Opcional) excluir os recursos criados
+
+Caso deseje limpar toda a instalação pode executar o comando:
+```shell
+helm uninstall wordpress -n wordpress
+```
+
+Isso irá apagar todos os recursos criados no kubernetes.
+
+
+## Considerações finais
+
+Com esse laboratório conseguimos subir uma infraestrutura do wordpress com mysql, utilizando os helm-charts definidos por nós em, [(https://viniciuscornieri.github.io/4asor-mba-aquitetura-de-microcontainers-trabalho-bonus/)](https://viniciuscornieri.github.io/4asor-mba-aquitetura-de-microcontainers-trabalho-bonus/). Para wordpress existem diversos charts já prontos que poderiam ser utilizados com diversos niveis de customização, como por exemplo o da [bitnami](https://artifacthub.io/packages/helm/bitnami/wordpress). Decidimos fazer o nossos próprio charts pelas possibilidades de aprendizado e customização, mas em um cenário produtivo pegar esses artefatos da comunidade é o mais recomendado.
