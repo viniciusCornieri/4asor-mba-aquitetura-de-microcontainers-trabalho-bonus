@@ -1,6 +1,7 @@
 # Trabalho bônus Arquitetura de Microcontainers
 
-Esta página tem como objetivo fornecer os arquivos no formato de [helm-chart](https://helm.sh/) para a infraestrutura de wordpress com banco de dados mysql gerenciado em Kubernetes, é referente a um trabalho bônus do MBA de Arquitetura de Soluções da FIAP da disciplina de Arquitetura de Microcontainers. Esta página e fornecimento do helm-chart pelo github pages foi feito utilizando como base o projeto especificado em [Provision a free personal Helm chart repo using GitHub](https://medium.com/@gerkElznik/provision-a-free-personal-helm-chart-repo-using-github-583b668d9ba4). Os charts e a referência para sua criação estão na branch `gh-pages`. nesta branch padrão assume que irá utilizar os charts já criados e publicados por este github.
+Esta página tem como objetivo fornecer os arquivos no formato de [helm-chart](https://helm.sh/) para a infraestrutura de wordpress com banco de dados mysql gerenciado em Kubernetes, é referente a um trabalho bônus do MBA de Arquitetura de Soluções da FIAP da disciplina de Arquitetura de Microcontainers. Esta página e fornecimento do helm-chart pelo github pages foi feito utilizando como base o projeto especificado em [Provision a free personal Helm chart repo using GitHub](https://medium.com/@gerkElznik/provision-a-free-personal-helm-chart-repo-using-github-583b668d9ba4). Os charts e a referência para sua criação estão na branch `gh-pages`, que está referenciada na página [do github pages](https://viniciuscornieri.github.io/4asor-mba-aquitetura-de-microcontainers-trabalho-bonus/)
+. nesta branch padrão assume que irá utilizar os charts já criados e publicados por este github.
 
 ## Pré-requisitos
 
@@ -58,10 +59,24 @@ kubectl get nodes
 exemplo de saída:
 ![exemplo de saída install k3s](docs/prereq-install-k3s-out.png)
 
+### 4. Configurar .kube/config
+
+Para utilizar o helm com esse cluster é necessário configurar o arquivo `.kube/config`
+
+```shell
+# cria diretorio .kube
+mkdir $HOME/.kube
+# copia arquivo de configuração
+sudo cp /etc/rancher/k3s/k3s.yaml $HOME/.kube/config
+# dá permissão no arquimo
+sudo chmod 644 $HOME/.kube/config
+```
 
 ## Execução do laboratório
 
-Com o Helm e o K3S instalados, o primeiro passo é adicionar o repositório com os charts do mysql e wordpress no helm:
+### Passo 01 - Adicionar repositório com os charts
+
+Com o Helm e o K3S instalados e configurados, o primeiro passo é adicionar o repositório com os charts do mysql e wordpress no helm:
 
 ```shell
 # Adiciona o repositorio no helm
@@ -80,5 +95,30 @@ helm search repo 4asor-vmc
 
 ```
 
-Após isso é possível executar `helm search repo 4asor-vmc` para visualizar os charts disponíveis.
+exemplo de saída:
+![exemplo de saída lab step01 adicionar repo](docs/lab-step01-adicionar-repo.png)
 
+### Passo 02 - Criar um namespace para o wordpress
+
+Vamos criar um namespace para que esta aplicação seja deployada.
+
+```shell
+# cria o namespace wordpress no kubernetes
+kubectl create namespace wordpress
+
+```
+
+### Passo 03 - Instalar o chart do wordpress
+
+Com o seguinte comando iremos instalar o chart do wordpress que tem como dependência o chart do mysql referenciados [na página](https://viniciuscornieri.github.io/4asor-mba-aquitetura-de-microcontainers-trabalho-bonus/). Redifina as senhas para senhas seguras que serão guardadas como `secret` do kubernetes. 
+
+```shell
+# instala chart do wordpress no namespace wordpress
+helm install wordpress 4asor-vmc/wordpress \
+  --namespace wordpress \
+  --set mysql.rootPassword=SuaSenhaSegura123! \
+  --set mysql.password=SuaSenhaWordPress456! \
+  --set mysql.user=wordpress \
+  --set mysql.database=wordpress
+
+```
