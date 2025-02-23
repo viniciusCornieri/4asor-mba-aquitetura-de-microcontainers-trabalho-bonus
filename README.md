@@ -116,9 +116,9 @@ Com o seguinte comando iremos instalar o chart do wordpress que tem como depend√
 # instala chart do wordpress no namespace wordpress
 helm install wordpress 4asor/wordpress \
   --namespace wordpress \
-  --set mysql.mysql.rootPassword=SuaSenhaSegura123! \
-  --set mysql.mysql.password=SuaSenhaPress456! \
-  --set mysql.mysql.user=wordpress \
-  --set mysql.mysql.database=wordpress
+  --set db.mysql.rootPassword=SuaSenhaSegura123! \
+  --set db.mysql.password=SuaSenhaPress456! \
+  --set db.mysql.user=wordpress \
+  --set db.mysql.database=wordpress
 
 ```
