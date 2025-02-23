@@ -121,14 +121,15 @@ kubectl create namespace wordpress
 
 ### Passo 03 - Instalar o chart do wordpress
 
-Com o seguinte comando iremos instalar o chart do wordpress que tem como dependência o chart do mysql referenciados [na página](https://viniciuscornieri.github.io/4asor-mba-aquitetura-de-microcontainers-trabalho-bonus/). Redifina as senhas para senhas seguras que serão guardadas como `secret` do kubernetes. Como o mysql é uma subdependencia do wordpress, para redefinir as configuração temos que referenciar o subchart chart `mysql` e as propriedades `mysql...`, como exemplo o definindo o rootPassword assim, `mysql.mysql.rootPassword=novaSenha`.
+Com o seguinte comando iremos instalar o chart do wordpress que tem como dependência o chart do mysql referenciados [na página](https://viniciuscornieri.github.io/4asor-mba-aquitetura-de-microcontainers-trabalho-bonus/). Redifina as senhas para senhas seguras que serão guardadas como `secret` do kubernetes. Como o mysql é uma subdependencia do wordpress, para redefinir as configuração temos que referenciar o subchart chart `mysql` e as propriedades `mysql...`, como exemplo o definindo o rootPassword assim, `mysql.mysql.rootPassword=novaSenha`. A propriedade `replicas` define a quantidade de replicas do servidor wordpress.
 
 ```shell
 # instala chart do wordpress no namespace wordpress
 helm install wordpress 4asor/wordpress \
   --namespace wordpress \
+  --set replicas=3  \
   --set mysql.mysql.rootPassword=SuaSenhaSegura123! \
-  --set mysql.mysql.password=SuaSenhaPress456! \
+  --set mysql.mysql.password=SuaSenhaApp456! \
   --set mysql.mysql.user=wordpress \
   --set mysql.mysql.database=wordpress
 
@@ -140,6 +141,6 @@ Visualizar se os pods estão de pé:
 kubectl get pods -n wordpress -w
 ```
 
-Aguardar até que ambos os pods estejam `READY 1/1`. Apertar `Ctrl+C` para sair do modo watch.
+Aguardar até que todos os pods estejam `READY 1/1`. Apertar `Ctrl+C` para sair do modo watch.
 Exemplo de saida:
 ![pods em pé](docs/pods-up.png)
