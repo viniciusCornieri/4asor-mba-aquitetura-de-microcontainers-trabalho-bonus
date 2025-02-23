@@ -1,0 +1,10 @@
+MySQL has been deployed successfully!
+
+Connection details:
+  Host: {{ .Release.Name }}-mysql
+  Port: 3306
+  Database: {{ .Values.mysql.database }}
+  User: {{ .Values.mysql.user }}
+
+To connect to your database:
+  kubectl run -it --rm --image=mysql:8.0 --restart=Never mysql-client -- mysql -h {{ .Release.Name }}-mysql -u {{ .Values.mysql.user }} -p{{ .Values.mysql.password }}
