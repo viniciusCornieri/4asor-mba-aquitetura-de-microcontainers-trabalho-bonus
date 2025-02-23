@@ -48,20 +48,29 @@ spec:
           mountPath: /var/www/html
         resources:
           {{- toYaml .Values.resources | nindent 12 }}
-        livenessProbe:
+        startupProbe:
           httpGet:
-            path: /wp-admin/install.php
-            port: http
-          initialDelaySeconds: 120
-          timeoutSeconds: 5
-          failureThreshold: 6
+            path: /
+            port: 80
+          initialDelaySeconds: 10
+          failureThreshold: 10
+          periodSeconds: 5
         readinessProbe:
           httpGet:
-            path: /wp-admin/install.php
-            port: http
-          initialDelaySeconds: 30
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 5
           timeoutSeconds: 3
+          failureThreshold: 3
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 10
           periodSeconds: 10
+          timeoutSeconds: 3
+          failureThreshold: 5
       volumes:
       - name: wordpress-persistent-storage
         persistentVolumeClaim:
