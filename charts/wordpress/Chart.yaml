@@ -1,7 +1,7 @@
 apiVersion: v2
 name: wordpress
 description: WordPress chart for company website
-version: 0.1.9
+version: 0.1.10
 type: application
 dependencies:
   - name: mysql

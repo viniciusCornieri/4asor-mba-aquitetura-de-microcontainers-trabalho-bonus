@@ -64,7 +64,7 @@ no chart do mysql foi criado um secret para  as senhas, o usuário da aplicaçã
 4asor-mba-aquitetura-de-microcontainers-trabalho-bonus/\
 ├── .github/\
 │   └── workflows/\
-│       └── [release.yaml](.github/workflows/release.yaml)\
+│       └── [release.yaml](https://raw.githubusercontent.com/viniciusCornieri/4asor-mba-aquitetura-de-microcontainers-trabalho-bonus/refs/heads/gh-pages/.github/workflows/release.yaml)\
 ├── charts/\
 │   ├── mysql/\
 │   │   ├── [Chart.yaml](charts/mysql/Chart.yaml)\
