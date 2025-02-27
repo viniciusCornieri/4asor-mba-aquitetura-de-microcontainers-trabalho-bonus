@@ -1,7 +1,6 @@
-# Trabalho bônus Arquitetura de Microcontainers
+# Trabalho bônus A - Arquitetura de Microcontainers
 
-Esta página tem como objetivo fornecer os arquivos no formato de [helm-chart](https://helm.sh/) para a infraestrutura de wordpress com banco de dados mysql gerenciado em Kubernetes, é referente a um trabalho bônus do MBA de Arquitetura de Soluções da FIAP da disciplina de Arquitetura de Microcontainers. Esta página e fornecimento do helm-chart pelo github pages foi feito utilizando como base o projeto especificado em [Provision a free personal Helm chart repo using GitHub](https://medium.com/@gerkElznik/provision-a-free-personal-helm-chart-repo-using-github-583b668d9ba4). Os charts e a referência para sua criação estão na branch `gh-pages`, que está referenciada na página [do github pages](https://viniciuscornieri.github.io/4asor-mba-aquitetura-de-microcontainers-trabalho-bonus/)
-. nesta branch padrão assume que irá utilizar os charts já criados e publicados por este github.
+Este [repositório](https://github.com/viniciusCornieri/4asor-mba-aquitetura-de-microcontainers-trabalho-bonus/tree/main), é referente a entrega do trabalho bônus A do MBA de Arquitetura de Soluções da FIAP da disciplina de Arquitetura de Microcontainers. Nesta branch `main` apresenta os passos para executar o laboratório que é fornecer uma infraestrutura resiliente de mysql e wordpress gerenciada em kubernetes. Neste projeto para a infraestrutura utilizamos [helm-chart](https://helm.sh/) para construir e instalar os recursos necessários no kubernetes. O fornecimento do helm-chart pelo github pages foi feito utilizando como base o projeto especificado em [Provision a free personal Helm chart repo using GitHub](https://medium.com/@gerkElznik/provision-a-free-personal-helm-chart-repo-using-github-583b668d9ba4). Os charts e a página de referência estão na branch `gh-pages`, que está referenciada na página [do github pages](https://viniciuscornieri.github.io/4asor-mba-aquitetura-de-microcontainers-trabalho-bonus/). Nesta laboratório assume que irá ser utilizado os charts já criados e publicados por este repositório.
 
 ## Alunos
 
@@ -131,7 +130,7 @@ kubectl create namespace wordpress
 
 ```
 
-### Passo 03 - Instalar o chart do wordpress
+### Passo 03 - Instalar o chart customizado do wordpress
 
 Com o seguinte comando iremos instalar o chart do wordpress que tem como dependência o chart do mysql referenciados [na página](https://viniciuscornieri.github.io/4asor-mba-aquitetura-de-microcontainers-trabalho-bonus/). Redifina as senhas para senhas seguras que serão guardadas como `secret` do kubernetes. Como o mysql é uma subdependencia do wordpress, para redefinir as configuração temos que referenciar o subchart chart `mysql` e as propriedades `mysql...`, como exemplo o definindo o rootPassword assim, `mysql.mysql.rootPassword=novaSenha`. A propriedade `replicas` define a quantidade de replicas do servidor wordpress.
 
@@ -190,4 +189,4 @@ Isso irá apagar todos os recursos criados no kubernetes.
 
 ## Considerações finais
 
-Com esse laboratório conseguimos subir uma infraestrutura do wordpress com mysql, utilizando os helm-charts definidos por nós em, [(https://viniciuscornieri.github.io/4asor-mba-aquitetura-de-microcontainers-trabalho-bonus/)](https://viniciuscornieri.github.io/4asor-mba-aquitetura-de-microcontainers-trabalho-bonus/). Para wordpress existem diversos charts já prontos que poderiam ser utilizados com diversos niveis de customização, como por exemplo o da [bitnami](https://artifacthub.io/packages/helm/bitnami/wordpress). Decidimos fazer o nossos próprio charts pelas possibilidades de aprendizado e customização, mas em um cenário produtivo pegar esses artefatos da comunidade é o mais recomendado.
+Com esse laboratório conseguimos subir uma infraestrutura do wordpress com mysql, utilizando os helm-charts definidos por nós em, [(https://viniciuscornieri.github.io/4asor-mba-aquitetura-de-microcontainers-trabalho-bonus/)](https://viniciuscornieri.github.io/4asor-mba-aquitetura-de-microcontainers-trabalho-bonus/). Os pods do wordpress utilizam um volume persistente, sendo assim caso caiam ou fiquem indisponiveis serão reconstruidos gerando resiliência para a aplicação. Para wordpress existem diversos charts já prontos que poderiam ser utilizados com diversos niveis de customização, como por exemplo o da [bitnami](https://artifacthub.io/packages/helm/bitnami/wordpress). Decidimos fazer o nossos próprio charts pelas possibilidades de aprendizado e customização, mas em um cenário produtivo pegar esses artefatos da comunidade é o mais recomendado.
